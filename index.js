@@ -1,15 +1,15 @@
-function validUserName(userName){
-    if(userName.length < 3){
-        return "too short"
-    }
-  else if(userName.includes(" ")){
-    return "space are not allowed"
-  }
+function getCngFare(distance, isNight = false, waitingMinutes = 0){
+  let fare = 50;
 
-  else if(userName.toLowerCase().includes("admin")){
-    return "reserved keyword"
+  if(distance > 2){
+    fare = fare + (distance - 2) * 15;
   }
-  return "available"
-}
-let checkValue = validUserName("adin");
-console.log(checkValue);
+  fare = fare + waitingMinutes * 2;
+
+  if(isNight){
+    fare = fare * 1.20;
+  }
+  return fare;
+};
+
+console.log(getCngFare(5, false, 3));
