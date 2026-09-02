@@ -1,24 +1,8 @@
-function getTypeDate(day){
-   day = day.toLowerCase();
-//check start 
-   switch(day){
-    case "friday":
-    case "saturday":
-       return "weekend";
-
-    case "sunday":
-    case "monday":
-    case "tuesday":
-    case "wednessday":
-    case "thursday":
-        return "working day";
-  
-   default :
-  return  "invalid day"
-   }
+function descriveValue(value){
+    let type = typeof value;
+    let typeCheck = value ? "truthy" : "falsy";
+ 
+    return type + " | " + typeCheck;
 }
-
-let checkValue = getTypeDate("");
-let checkDay = getTypeDate("sunday")
-console.log(checkValue, checkDay);
-
+let checkValue = descriveValue(3);
+console.log(checkValue);
