@@ -1,15 +1,33 @@
-function getCngFare(distance, isNight = false, waitingMinutes = 0){
-  let fare = 50;
+const getChaseVerdict = (target, scored, ballsLeft) => {
+    const runsNeeded = target - scored;
 
-  if(distance > 2){
-    fare = fare + (distance - 2) * 15;
-  }
-  fare = fare + waitingMinutes * 2;
+    if (runsNeeded <= 0) {
+        return "Won";
+    }
 
-  if(isNight){
-    fare = fare * 1.20;
-  }
-  return fare;
+    if (ballsLeft <= 0) {
+        return "Lost";
+    }
+
+    const requiredRate = (runsNeeded / ballsLeft) * 6;
+
+    let verdict;
+
+    if (requiredRate <= 6) {
+        verdict = "Comfortable";
+    } else if (requiredRate <= 12) {
+        verdict = "Tough";
+    } else {
+        verdict = "Almost Impossible";
+    }
+
+    return `Need ${runsNeeded} runs in ${ballsLeft} balls | ${verdict}`;
 };
+console.log(getChaseVerdict(100, 90, 12));
+// Need 10 runs in 12 balls | Comfortable
 
-console.log(getCngFare(5, false, 3));
+console.log(getChaseVerdict(100, 80, 12));
+// Need 20 runs in 12 balls | Tough
+
+console.log(getChaseVerdict(100, 70, 12));
+// Need 30 runs in 12 balls | Almost Impossible
